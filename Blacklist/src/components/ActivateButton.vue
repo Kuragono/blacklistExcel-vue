@@ -1,14 +1,15 @@
 <template>
     <section>
-        <button @click.prevent="clickOut(SELECTOR1, URL1)">Artikel</button>
-        <button @click.prevent="clickOut(SELECTOR2, URL2)">Artikel Mobile</button>
-        <button @click.prevent="clickOut(SELECTOR3, URL3)">Beipack</button>
-        <button @click.prevent="clickOut(SELECTOR4, URL4)">Beipack Mobile</button>
+        <button @click.prevent="clickOut(SELECTOR1, URL1)" class="selektorbutton" id="artikel">Artikel</button>
+        <button @click.prevent="clickOut(SELECTOR2, URL2)" class="selektorbutton" id="artikel_mobile">Artikel Mobile</button>
+        <button @click.prevent="clickOut(SELECTOR3, URL3)" class="selektorbutton" id="beipack">Beipack</button>
+        <button @click.prevent="clickOut(SELECTOR4, URL4)" class="selektorbutton" id="beipack_mobile">Beipack Mobile</button>
     </section>
 </template>
 
 <script>
     export default {
+        emmits: ['activate-button'],
         data() {
             return {
                 SELECTOR1: `#dm_conative_artikel`,
@@ -23,7 +24,8 @@
         },
         methods: {
             clickOut(selector, url) {
-                
+                console.log(selector,url)
+                window.open(url, '_blank').focus();
             }
         },
     }
