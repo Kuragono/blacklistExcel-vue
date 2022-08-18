@@ -6,7 +6,13 @@
 
 <script>
 export default {
-    emits: ['get-data'],
+    data() {
+        return {
+            ini_keywordlist: []
+        }
+    },
+    emits: [''],
+    props: ['keywordlist'],
     methods: {
         getData(event) {
             if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
@@ -22,18 +28,18 @@ export default {
                 console.log('file read')
                 let file = event.target.files[0];
                 let reader = new FileReader();
-                reader.onload = (event) => this.readData(reader.result);
+                reader.onload = () => this.readData(reader.result);
                 reader.readAsText(file);
             }
         },
-        readData(ndata) {                                                 //reads the data
-            let keywordsArray = ndata.split('\r\n');    //splits the data into more human readable data
+        readData(unprocessedData) {                                                 //reads the data
+            let keywordsArray = unprocessedData.split('\r\n');    //splits the data into more human readable data
             let tmpArray = [];                                      //creates a temporary array to work on
             for (let i = 1; i < keywordsArray.length; i++) {
                 tmpArray.push(keywordsArray[i].split(";"));
             }
-            globalThis.data = this.createObject(tmpArray);
-            this.createTable(data);
+            this.createObject(tmpArray);
+            this.createTable();
         },
         createObject(data) {                                         //transforms data into an Object for better accessability
             let keyword = '';
@@ -55,9 +61,10 @@ export default {
                 }
             }
             delete keywordlist[""];                                            //deletes the "" key/value pair
-            return (keywordlist);
+            this.ini_keywordlist = keywordlist;
+            this.$emit('update:keywordlist', keywordlist);
         },
-        createTable(data) {
+        createTable() {
             let body = document.querySelector('body');
             let table = document.createElement('table');
             table.cellSpacing = 0;
@@ -67,7 +74,7 @@ export default {
             let monthCell = row.insertCell(1);
             keywordCell.textContent = "Keyword";
             monthCell.textContent = "Monat";
-            for (const [key, value] of Object.entries(data)) { 
+            for (const [key, value] of Object.entries(this.ini_keywordlist)) { 
                 let row = table.insertRow(-1);
                 let leftCell = row.insertCell(0); 
                 let rightCell = row.insertCell(1);

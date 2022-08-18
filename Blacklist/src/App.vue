@@ -1,8 +1,8 @@
 <template lang="">
   <div>
-    <activate-button @activate-button="$emit('activate-button', $event)"></activate-button>
+    <activate-button @activate-button="$emit('activate-button', $event)" v-model:keywordlist="keywordlist"></activate-button>
     <br>
-    <get-data @get-data="$emit('get-data', $event)"></get-data>
+    <get-data v-model:keywordlist="keywordlist"></get-data>
     <br>
     <img src="/logo_copy.png" alt="definemedia logo" id="definelogo">
   </div>
@@ -12,7 +12,7 @@
 export default {
   data() {
     return {
-      
+      keywordlist: [],
     }
   }
 }
