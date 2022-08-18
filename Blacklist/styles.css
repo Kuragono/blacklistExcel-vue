@@ -46,4 +46,5 @@ tr:nth-child(1) {
       border: white 1px solid;
       border-radius: 5px;
       font-size: 15px;
+      margin-right: 8px;
   }
