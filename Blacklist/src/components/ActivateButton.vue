@@ -9,7 +9,7 @@
 
 <script>
     export default {
-        emmits: ['activate-button'],
+        emits: ['activate-button'],
         data() {
             return {
                 SELECTOR1: `#dm_conative_artikel`,
@@ -30,7 +30,3 @@
         },
     }
 </script>
-
-<style>
-
-</style>

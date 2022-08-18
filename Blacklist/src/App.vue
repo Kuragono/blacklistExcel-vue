@@ -1,7 +1,10 @@
 <template lang="">
   <div>
     <activate-button @activate-button="$emit('activate-button', $event)"></activate-button>
-    <get-Data></get-Data>
+    <br>
+    <get-data @get-data="$emit('get-data', $event)"></get-data>
+    <br>
+    <img src="/logo_copy.png" alt="definemedia logo" id="definelogo">
   </div>
 </template>
 
@@ -14,6 +17,3 @@ export default {
   }
 }
 </script>
-
-<style lang="">
-</style>
